@@ -1,0 +1,24 @@
+.friendItem {
+  display: flex;
+  align-items: center;
+}
+.img {
+  width: 32px;
+  padding: 4px;
+  border-radius: 50%;
+  background-color: var(--light-primary-color);
+}
+.subtitle {
+  margin-left: 16px;
+  margin-right: auto;
+  color: var(--light-secondary-color);
+}
+.status {
+  font-size: 12px;
+}
+.isOnline {
+  color: var(--success-color);
+}
+.isOffline {
+  color: var(--danger-color);
+}

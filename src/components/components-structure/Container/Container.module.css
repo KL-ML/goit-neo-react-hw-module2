@@ -1,0 +1,51 @@
+.tabletWrap {
+  max-width: 343px;
+}
+@media (min-width: 768px){
+  .tabletWrap {
+    max-width: 476px;
+    width: 58vw;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: var(--dark-tertiary-color);
+  }
+}
+@media (min-width: 1024px) {
+  .tabletWrap {
+    padding: 20px;
+    border-radius: 12px;
+    background-color: var(--dark-tertiary-color);
+  }
+  .tabletWrap:has(.profileContainer) {
+    width: 448px;
+  }
+  .tabletWrap:has(.friendsListContainer) {
+    width: 224px;
+  }
+  .tabletWrap:has(.tableContainer) {
+    min-width: 704px;
+  }
+}
+.cardContainer {
+  border-radius: 12px;
+  width: 100%;
+  background-color: var(--dark-secondary-color);
+}
+
+.profileContainer {
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: transparent;
+}
+@media (min-width: 768px) {
+  .profileContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.friendsListContainer {
+  padding: 16px;
+}
+.tableContainer {
+  overflow: hidden;
+}
