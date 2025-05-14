@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import clsx from 'clsx';
 import SidebarMenuItem from '../SidebarMenuItem/SidebarMenuItem';
 import css from './Sidebar.module.css';
@@ -58,3 +60,13 @@ export default function Sidebar({
     </div>
   );
 }
+
+Sidebar.PropTypes = {
+  children: PropTypes.any,
+  menuItems: PropTypes.object,
+  variant: PropTypes.string,
+  mobileMenu: PropTypes.bool,
+  moduleNumber: PropTypes.string,
+  moduleTitle: PropTypes.string,
+  onUpdate: PropTypes.func,
+};
