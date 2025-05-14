@@ -1,37 +1,99 @@
-import css from './App.module.css';
-
-import Header from './components-structure/Header/Header';
+import Section from './Section/Section';
+import Header from './Header/Header';
 import logoImgPath from '../images/logo.svg';
+import Main from './Main/Main';
+import Footer from './Footer/Footer';
 
-import Profile from './Profile/Profile';
-import userData from '../data/userData.json';
+import Description from './Description/Description';
+import Options from './Options/Options';
+import Feedback from './Feedback/Feedback';
+import Notification from './Notification/Notification';
 
-import friends from '../data/friends.json';
-import FriendList from './FriendList/FriendList';
+import Backdrop from './Backdrop/Backdrop';
 
-import transactions from '../data/transactions.json';
-import TransactionHistory from './TransactionHistory/TransactionHistory';
+import Sidebar from './Sidebar/Sidebar';
+import menuItems from '../data/sidebarMenu.json';
 
-import Footer from './components-structure/Footer/Footer';
-import Main from './components-structure/Main/Main';
+import { useState } from 'react';
+import useLocalStorage from '../hooks/useLocalStorage';
+
+const feedbackInitModel = {
+  good: 0,
+  neutral: 0,
+  bad: 0,
+};
+
+const homeWork = {
+  number: '2',
+  title: 'State and life cycle.',
+};
 
 const App = () => {
+  const [mobileMenuStatus, setMobileMenuStatus] = useState(false);
+  const [feedbacks, setFeedbacks] = useLocalStorage(
+    'saved-feedbacks',
+    feedbackInitModel
+  );
+
+  function updateModuleMenuStatus(mobileMenuStatus) {
+    setMobileMenuStatus((mobileMenuStatus = !mobileMenuStatus));
+  }
+
+  function updateFeedback(feedbackType) {
+    setFeedbacks({ ...feedbacks, [feedbackType]: feedbacks[feedbackType] + 1 });
+  }
+
+  function resetFeedback() {
+    setFeedbacks(feedbackInitModel);
+  }
+
+  const totalFeedback = Object.values(feedbacks).reduce((a, b) => a + b, 0);
+
+  const positiveFeedback = Math.round(
+    (feedbacks['good'] / totalFeedback) * 100
+  );
+
   return (
-    <div className={css.body}>
-      <Header logoImgPath={logoImgPath} />
+    <Section>
+      <Header
+        logoImgPath={logoImgPath}
+        moduleNumber={homeWork.number}
+        moduleTitle={homeWork.title}
+        onUpdate={updateModuleMenuStatus}
+      />
       <Main>
-        <Profile
-          name={userData.username}
-          tag={userData.tag}
-          location={userData.location}
-          image={userData.avatar}
-          stats={userData.stats}
+        <Description
+          title="Sip Happens Café"
+          description="Please leave your feedback about our service by selecting one of the options below."
         />
-        <FriendList friends={friends} />
-        <TransactionHistory items={transactions} />
+        <Options
+          buttons={feedbacks}
+          onUpdate={updateFeedback}
+          total={totalFeedback}
+          reset={resetFeedback}
+        />
+        {totalFeedback === 0 ? (
+          <Notification />
+        ) : (
+          <Feedback
+            feedbacks={feedbacks}
+            total={totalFeedback}
+            positive={positiveFeedback}
+          />
+        )}
       </Main>
       <Footer />
-    </div>
+      <Backdrop mobileMenu={mobileMenuStatus}>
+        <Sidebar
+          menuItems={menuItems}
+          variant="mobileMenu"
+          mobileMenu={mobileMenuStatus}
+          moduleNumber={homeWork.number}
+          moduleTitle={homeWork.title}
+          onUpdate={updateModuleMenuStatus}
+        />
+      </Backdrop>
+    </Section>
   );
 };
 
