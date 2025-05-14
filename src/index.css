@@ -1,4 +1,11 @@
-:root {
+@import './styles/variables.css';
+
+html {
+  scroll-behavior: smooth;
+  cursor: default;
+}
+
+body {
   font-family: Montserrat, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
   font-size: 14px;
@@ -8,26 +15,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  /* color variables */
-  --light-color: #ffffff;
-  --light-primary-color: #fafafb;
-  --light-secondary-color: #b5b5be;
-  --light-tertiary-color: #92929d;
-  --dark-color: #000000;
-  --dark-primary-color: #13131a;
-  --dark-secondary-color: #1c1c24;
-  --dark-tertiary-color: #292932;
-  --accent-primary-color: #f07f2e;
-  --accent-secondary-color: #f15c27;
-  --accent-tertiary-color: #d14a00;
-  --danger-color: #fc5a5a;
-  --warning-color: #a461d8;
-  --success-color: #82c43c;
-  --info-color: #4e75ff;
-
-  background-color: var(--dark-color);
-  color: var(--light-color);
 }
 
 h1,
